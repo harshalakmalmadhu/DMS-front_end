@@ -14,6 +14,7 @@ export class RegistrationComponent implements OnInit {
   ngOnInit() {
   }
   onSubmit(){
+    
     this.service.register().subscribe(
       (res: any) => {
         if (res.Successful) {

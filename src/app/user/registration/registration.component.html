@@ -17,6 +17,15 @@
                 <label>FullName</label>
                 <input class="form-control" formControlName="FullName">
             </div>
+            <div class="form-group">
+                <label>Vehicle Number</label>
+                <input class="form-control" formControlName="VehicleNo">
+            </div>  
+            
+            <div class="form-group">
+                <label>Mobile No</label>
+                <input class="form-control" formControlName="MobileNo">
+            </div>  
             
 
 
@@ -39,7 +48,7 @@
 
             <div class="form-row">
                 <div class="form-group col-md-8 offset-md-2">
-                    <button type="submit" class="btn btn-lg btn-block">Sign Up</button>
+                    <button type="submit" class="btn btn-outline-primary waves-effect" [disabled]="!service.formModel.valid">Submit</button>
                 </div>
             </div>
 

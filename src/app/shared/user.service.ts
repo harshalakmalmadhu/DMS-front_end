@@ -19,6 +19,8 @@ export class UserService {
     UserName: ['',Validators.required],
     Email: ['',[Validators.required,Validators.email]],
     FullName: [''],
+    MobileNo:[''],
+    VehicleNo:[''],
     Passwords: this.fb.group({
       Password: ['',[Validators.required,Validators.minLength(4)]],
       ConfirmPassword: ['',Validators.required]
@@ -42,6 +44,8 @@ export class UserService {
       UserName:this.formModel.value.UserName,
       Email:this.formModel.value.Email,
       FullName:this.formModel.value.FullName,
+      VehicleNo:this.formModel.value.VehicleNo,
+      MobileNo:this.formModel.value.MobileNo,
       Password:this.formModel.value.Passwords.Password,
     };
     return this.http.post(this.BaseURI+'/insertBody',body);
