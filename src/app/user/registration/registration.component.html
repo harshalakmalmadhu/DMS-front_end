@@ -1,22 +1,50 @@
 <div class="row mt-4">
-    <div class="col-md-6">
+    <div class="col-md-12">
         <form [formGroup]="service.formModel" autocomplete="off" (submit)="onSubmit()">
+
+        <div class="row">        
+            <div class="col-xs-12 col-12 col-sm-6 col-md-4 form-group">
+                <label>Selected Date</label>
+                <input class="form-control" formControlName="SelectedDate" value={{data.Date}} readonly>
+                <!-- data from search component -->
+            </div> 
+
+            <div class="col-xs-12 col-12 col-sm-6 col-md-4 form-group">
+                <label>Selected Service Center</label>
+                <input class="form-control" formControlName="SelectedSC" value={{countryName}} readonly>
+                <!-- data from search component -->
+            </div> 
+            <div class="col-xs-12 col-12 col-sm-6 col-md-4 form-group">
+                    <label>Selected Time</label>
+                    <input class="form-control" formControlName="SelectedTime" readonly>
+                    <!-- data from search component -->
+                </div> 
+         </div>  
+            
+
+
+
+            <div class="form-group">
+                <label>Service Type</label>
+                    <select class="form-control" formControlName="servicetype" required>
+                        <option value="">--Select Service--</option>
+                        <option  *ngFor="let x of servicetypes" value={{x.id}}>{{x.serviceType}}</option>     
+                    </select>
+            </div>
+
             <div class="form-group">
                 <label>UserName</label>
                 <input class="form-control" formControlName="UserName">
                 <label class="text-danger" *ngIf="service.formModel.get('UserName').touched && service.formModel.get('UserName').errors?.required">This field is mandotory</label>
             </div>
+
             <div class="form-group">
                 <label>Email</label>
                 <input class="form-control" formControlName="Email">
-              <label class="text-danger" *ngIf="service.formModel.get('Email').touched && service.formModel.get('Email').errors?.required">This field is mandotory</label> 
+                <label class="text-danger" *ngIf="service.formModel.get('Email').touched && service.formModel.get('Email').errors?.required">This field is mandotory</label> 
                 <label class="text-danger" *ngIf="service.formModel.get('Email').touched && service.formModel.get('Email').errors?.email">Invalid email address</label>
-                
             </div>
-            <div class="form-group">
-                <label>FullName</label>
-                <input class="form-control" formControlName="FullName">
-            </div>
+           
             <div class="form-group">
                 <label>Vehicle Number</label>
                 <input class="form-control" formControlName="VehicleNo">
@@ -26,10 +54,11 @@
                 <label>Mobile No</label>
                 <input class="form-control" formControlName="MobileNo">
             </div>  
+
             
 
 
-            <div formGroupName="Passwords">
+            <!-- <div formGroupName="Passwords">
 
             <div class="form-group">
                 <label>Password</label>
@@ -44,7 +73,9 @@
                 <label class="text-danger" *ngIf="service.formModel.get('Passwords.ConfirmPassword').touched && service.formModel.get('Passwords.ConfirmPassword').errors?.required">This field is mandotory</label>
                 <label class="text-danger" *ngIf="service.formModel.get('Passwords.ConfirmPassword').touched && service.formModel.get('Passwords.ConfirmPassword').errors?.passwordMissmatch">Confirm Password doesn't match</label>
             </div>
-        </div>
+        </div> -->
+        <!-- <input type="text" value={{data.brand}} readonly>
+        <input type="text" value={{countryName}} readonly> -->
 
             <div class="form-row">
                 <div class="form-group col-md-8 offset-md-2">
@@ -55,5 +86,6 @@
         </form>
 
     </div>
+
 
 </div>

@@ -1,6 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/shared/user.service';
 import { ToastrService } from 'ngx-toastr';
+import { Router,ActivatedRoute } from '@angular/router';
+
+
+import { SelectService } from 'src/app/shared/search.service';
+import { Country } from 'src/app/shared/country';
+import { State } from 'src/app/shared/state';
+import { ServiceTypes } from 'src/app/shared/service_types';
+
 
 @Component({
   selector: 'app-registration',
@@ -8,31 +16,68 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./registration.component.css']
 })
 export class RegistrationComponent implements OnInit {
+  
 
-  constructor(public service:UserService,private toastr : ToastrService) { }
+
+  
+  data:any;//take values from search
+  countryName:String = '';
+  
+
+  
+  constructor(public service:UserService,
+    private toastr : ToastrService,
+    private router:Router,
+    private activated:ActivatedRoute,
+    private serviceTypes:SelectService) { }
+    servicetypes:ServiceTypes[];
+    
 
   ngOnInit() {
-  }
+    this.servicetypes = this.serviceTypes.getServiceTypes();
+  
+    
+
+    this.activated.queryParams.subscribe((params)=>{
+      console.log(params);
+      this.data =JSON.parse(atob(params.data));
+      this.countryName =this.data.service;
+
+  })
+  
+  if(this.countryName=="1"){
+    this.countryName="Nissan-Union Place"}
+  if(this.countryName=="2"){
+    this.countryName="Rajagiriya Service Center"}
+    if(this.countryName=="3"){
+      this.countryName="Peliyagoda Service Center"}
+      if(this.countryName=="4"){
+        this.countryName="Pitstop-Negombo"}
+  else
+  this.countryName=this.countryName;}
+  
   onSubmit(){
     
     this.service.register().subscribe(
       (res: any) => {
         if (res.Successful) {
           this.service.formModel.reset();
-          this.toastr.success('New user created!', 'Registration successful.');
+          this.toastr.success('Thank you!', 'Booking successful.');
+          
          
         }else {
-          res.errors.forEach(element => {
-            switch (element.code) {
-              case 'DuplicateUserName':
-               this.toastr.error('Username is already taken','Registration failed.');
-                break;
+          // res.errors.forEach(element => {
+          //   switch (element.code) {
+          //     case 'DuplicateUserName':
+                this.toastr.error('Username is already taken','Registration failed.');
 
-              default:
-              this.toastr.error(element.description,'Registration failed.');
-                break;
-            }
-          });
+          //       break;
+
+          //     default:
+          //     this.toastr.error(element.description,'Registration failed.');
+          //       break;
+          //   }
+          // });
         }
       },
       err =>{
