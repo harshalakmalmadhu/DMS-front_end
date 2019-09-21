@@ -9,11 +9,11 @@ export class UserService {
 
   constructor(private fb:FormBuilder,private http:HttpClient) { }
 
+  data:any;//take values from search
+  countryName:any;
+  SelectedDate:any;
 
   readonly BaseURI = 'http://localhost:3032';
-
-
-
 
   formModel = this.fb.group({
     UserName: ['',Validators.required],
@@ -23,7 +23,7 @@ export class UserService {
     VehicleNo:[''],
     SelectedDate:[''],
     SelectedSC:[''],
-    SelectedTime:[''],
+    SelectedTime:['']
 
     // Passwords: this.fb.group({
     //   Password: ['',[Validators.required,Validators.minLength(4)]],
@@ -43,7 +43,10 @@ export class UserService {
   //     ConfirmPasswordCtrl.setErrors(null);
   //   }
   // }
-  register(){
+  
+  register(countryName,SelectedDate){
+    this.countryName=countryName;
+    this.SelectedDate=SelectedDate;
     var body = {
       UserName:this.formModel.value.UserName,
       Email:this.formModel.value.Email,
@@ -51,9 +54,9 @@ export class UserService {
       MobileNo:this.formModel.value.MobileNo,
       VehicleNo:this.formModel.value.VehicleNo,
 
-      SelectedDate:this.formModel.value.SelectedDate,
-      SelectedSC:this.formModel.value.SelectedSC,
-      SelectedTime:this.formModel.value.SelectedTime,
+      SelectedDate:this.SelectedDate,
+      SelectedSC:this.countryName,
+      SelectedTime:this.formModel.value.SelectedTime
       
       // Password:this.formModel.value.Passwords.Password,
     };

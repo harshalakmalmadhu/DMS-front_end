@@ -5,9 +5,8 @@ import { Router,ActivatedRoute } from '@angular/router';
 
 
 import { SelectService } from 'src/app/shared/search.service';
-import { Country } from 'src/app/shared/country';
-import { State } from 'src/app/shared/state';
 import { ServiceTypes } from 'src/app/shared/service_types';
+
 
 
 @Component({
@@ -22,6 +21,7 @@ export class RegistrationComponent implements OnInit {
   
   data:any;//take values from search
   countryName:String = '';
+  SelectedDate:String='';
   
 
   
@@ -42,6 +42,7 @@ export class RegistrationComponent implements OnInit {
       console.log(params);
       this.data =JSON.parse(atob(params.data));
       this.countryName =this.data.service;
+      this.SelectedDate=this.data.Date;
 
   })
   
@@ -55,14 +56,19 @@ export class RegistrationComponent implements OnInit {
         this.countryName="Pitstop-Negombo"}
   else
   this.countryName=this.countryName;}
+
+
+  // ++++++++++++++++++++++++++++++++++++++++++++++++++++ Communicate with backend
   
   onSubmit(){
+    this.countryName=this.countryName;
+    this.SelectedDate=this.data.Date;
     
-    this.service.register().subscribe(
+    this.service.register(this.countryName,this.SelectedDate).subscribe(
       (res: any) => {
         if (res.Successful) {
           this.service.formModel.reset();
-          this.toastr.success('Thank you!', 'Booking successful.');
+          this.toastr.success('Thank you!', 'Booking successful...');
           
          
         }else {

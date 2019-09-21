@@ -42,11 +42,11 @@ export class SelectService {
   }
   getServiceTypes(){
     return[
-    new ServiceTypes(1,'Body Wash'),
-    new ServiceTypes(2,'Oil and filter change'),
-    new ServiceTypes(3,'New air filter'),
-    new ServiceTypes(4,'Brake cylinders, pipes and hoses checked for leaks or damage'),
-    new ServiceTypes(5,'Full service')
+    new ServiceTypes('Body Wash'),
+    new ServiceTypes('Oil and filter change'),
+    new ServiceTypes('New air filter'),
+    new ServiceTypes('Brake cylinders, pipes and hoses checked for leaks or damage'),
+    new ServiceTypes('Full service')
   ];
     
 

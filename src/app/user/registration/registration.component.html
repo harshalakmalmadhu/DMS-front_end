@@ -5,13 +5,14 @@
         <div class="row">        
             <div class="col-xs-12 col-12 col-sm-6 col-md-4 form-group">
                 <label>Selected Date</label>
-                <input class="form-control" formControlName="SelectedDate" value={{data.Date}} readonly>
+                <input class="form-control" formControlName="SelectedDate"  [value]='data.Date' readonly> 
                 <!-- data from search component -->
             </div> 
 
             <div class="col-xs-12 col-12 col-sm-6 col-md-4 form-group">
                 <label>Selected Service Center</label>
                 <input class="form-control" formControlName="SelectedSC" value={{countryName}} readonly>
+                
                 <!-- data from search component -->
             </div> 
             <div class="col-xs-12 col-12 col-sm-6 col-md-4 form-group">
@@ -28,7 +29,7 @@
                 <label>Service Type</label>
                     <select class="form-control" formControlName="servicetype" required>
                         <option value="">--Select Service--</option>
-                        <option  *ngFor="let x of servicetypes" value={{x.id}}>{{x.serviceType}}</option>     
+                        <option  *ngFor="let x of servicetypes" value={{x.serviceType}}>{{x.serviceType}}</option>     
                     </select>
             </div>
 
