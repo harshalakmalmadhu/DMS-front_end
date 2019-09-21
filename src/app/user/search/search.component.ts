@@ -16,7 +16,9 @@ import {timeslots} from 'src/app/shared/timeslots';
   styleUrls: ['./search.component.css']
 })
 export class SearchComponent implements OnInit {
-  myDateValue: Date;//Date picker
+  
+  public showTimeslots : boolean = false;
+
   timeslots:timeslots[] = [
     {ts_id:'1',from:'7.45 AM',to : '8.00 AM'},
     {ts_id:'2',from:'8.00 AM',to : '8.30 AM'},
@@ -33,7 +35,7 @@ export class SearchComponent implements OnInit {
   
   
   ngOnInit() {
-    this.myDateValue = new Date();//date picker 
+     
     this.countries = this.selectService.getCountries();//load all the service centers 
     
     this.onSelect(this.selectedCountry.id);
@@ -44,27 +46,43 @@ export class SearchComponent implements OnInit {
   }
   constructor(private selectService: SelectService,private router :Router,private activated:ActivatedRoute ) {
     this.form = new FormGroup({
-      // name:new FormControl("",Validators.required),
-      // email:new FormControl("",Validators.required),
-      Date:new FormControl("",Validators.required),
-      service:new FormControl("",Validators.required),
-      brand:new FormControl("",Validators.required)
+      Date:new FormControl('',Validators.required),
+      service:new FormControl('',Validators.required),
+      brand:new FormControl('',Validators.required),
+      timeSlot:new FormControl('')
    })
   }
   selectedCountry: Country = new Country(0, '');
   countries: Country[];
   states: State[];
   form:any;
+  isShow:false ;
 
  
 
   // ======================================================= Data parsing to other component
+ 
+
   onSave(){
+    this.showTimeslots = !this.showTimeslots;
+
+
     let data:any = this.form.value;
-    this.router.navigate(['user/registration'],
-    {
-      queryParams:{data:btoa(JSON.stringify(data))}
-    })
+    
+    // this.router.navigate(['user/registration'],
+    // {
+    //   queryParams:{data:btoa(JSON.stringify(data))}
+    // })
+  }
+  onBook(selectedItem: any){
+    console.log(selectedItem.to);
+    let data:any = this.form.value;
+    
+     this.router.navigate(['user/registration'],
+     {
+       queryParams:{data:btoa(JSON.stringify(data))}
+     })
+
   }
   // =======================================================
 

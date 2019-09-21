@@ -25,24 +25,8 @@ export class UserService {
     SelectedSC:[''],
     SelectedTime:['']
 
-    // Passwords: this.fb.group({
-    //   Password: ['',[Validators.required,Validators.minLength(4)]],
-    //   ConfirmPassword: ['',Validators.required]
-
-    // },{validator : this.comparePasswords})
-
-
-
   });
-  // comparePasswords(fb:FormGroup){
-  //   let ConfirmPasswordCtrl = fb.get('ConfirmPassword');
-  //   if(ConfirmPasswordCtrl.errors == null || 'passwordMissmatch' in ConfirmPasswordCtrl.errors ){
-  //     if(fb.get('Password').value!=ConfirmPasswordCtrl.value)
-  //     ConfirmPasswordCtrl.setErrors({passwordMissmatch:true});
-  //     else
-  //     ConfirmPasswordCtrl.setErrors(null);
-  //   }
-  // }
+
   
   register(countryName,SelectedDate){
     this.countryName=countryName;
@@ -58,7 +42,6 @@ export class UserService {
       SelectedSC:this.countryName,
       SelectedTime:this.formModel.value.SelectedTime
       
-      // Password:this.formModel.value.Passwords.Password,
     };
     return this.http.post(this.BaseURI+'/insertBody',body);
 
