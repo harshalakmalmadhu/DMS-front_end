@@ -1,7 +1,30 @@
-
 <!-- Trigger the modal with a button -->
 <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">Book a service</button>
-
+<!-- <div class="container py-5">  
+  <h3 class="text-center text-uppercase">List of Employees</h3>  
+  <table class="table table-bordered table-striped">  
+      <thead>  
+          <tr class="text-center text-uppercase">  
+              <th>Employee ID</th>  
+              <th>First Name</th>  
+              <th>Last Name</th>  
+              <th>Salary</th>  
+              <th>Joining Date</th>  
+              <th>Department</th>  
+            </tr>  
+      </thead>  
+      <tbody>  
+        <tr *ngFor="let x of tsarray">  
+          <td>{{x.iserviceTyped}}</td>  
+          <td>{{x.email}}</td>  
+          <td>{{x.mobileNo}}</td>  
+          <td>{{x.timeSlot}}</td>  
+          <td>{{x.serviceCenter}}</td>  
+          <td>{{x.createdDateTime}}</td>  
+        </tr>  
+      </tbody>  
+    </table>  
+  </div>   -->
 <!-- Modal -->
 <div id="myModal" class="modal fade" role="dialog">
   <div class="modal-dialog modal-lg">
@@ -9,81 +32,82 @@
     <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
-          <h4 style="font-family: 'Dancing Script', cursive;
+        <h4 style="font-family: 'Dancing Script', cursive;
           font-size: 20px;
           margin-bottom: 30px;">Book a Service</h4>
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        
+
       </div>
 
       <div class="modal-body">
-  <!-- ==============================================================================popup content -->
-<div class="container">
-    <div class="col-md-6">
-      <div [formGroup]="form">
-        <div class="form-group">
-          <label>Date</label>      
-            <div class="input-icons"> 
+        <!-- ==============================================================================popup content -->
+        <div class="container">
+          <div class="col-md-6" *ngIf="showDatePickerArea">
+            <div [formGroup]="form">
+              <div class="form-group">
+                <label>Date</label>
                 
-                <i class="fa fa-calendar icon"></i>
+                  <div class="input-group-prepend">
+                    <div class="input-group-text"><i class="fa fa-calendar" area-hidden="true"></i></div>
+                    <input type="text" placeholder="Choose a Date" class="form-control" [minDate]="minDate"
+                      [bsValue]="bsValue" formControlName="Date" bsDatepicker placement="right">
+                  </div>
                 
-            
-            <input type="text"
-                   placeholder="Choose a Date"
-                   class="form-control" [minDate]="minDate" formControlName="Date"
-                   bsDatepicker >
-                  </div> 
+              </div>
+
+              <div class="form-group">
+                <label>Service Center</label>
+
+                <select [(ngModel)]="selectedCountry.id" (change)="onSelect($event.target.value)" class="form-control"
+                  id="service" formControlName="service" required>
+                  <label class="text-danger"
+                    *ngIf="form.get('service').touched && form.get('service').errors?.required">This field is
+                    mandotory</label>
+                  <option value="0">--Select--</option>
+                  <option *ngFor="let country of countries" value={{country.id}}>{{country.name}}</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label>Brand</label>
+                <select class="form-control" formControlName="brand">
+                  <option value="">--Select--</option>
+                  <option *ngFor="let state of states ">{{state.name}}</option>
+
+                </select>
+              </div>
+
+
+              <button type="button" class="btn btn-primary" (click)="onSave()">Search</button>
+
+
+            </div>
+          </div>
+          <div class="form-group" *ngIf="showTimeslots">
+            <table class="table table-hover table-sm">
+              <thead>
+                <tr>
+                  <th>Time Slot</th>
+                  <th>From</th>
+                  <th>To</th>
+                  <th>Click to Book</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let timeslot of timeslots">
+                  <td>{{ timeslot.ts_id }}</td>
+                  <td>{{ timeslot.from }}</td>
+                  <td>{{ timeslot.to}}</td>
+                  <td><button type="button" class="btn btn-primary btn-sm" (click)="onBook(timeslot)"
+                      data-dismiss="modal">Book now</button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+
         </div>
-        
-        <div class="form-group">
-            <label>Service Center</label>
-            
-            <select [(ngModel)]="selectedCountry.id" (change)="onSelect($event.target.value)" class="form-control" id="service" formControlName="service" required>
-              <label class="text-danger" *ngIf="form.get('service').touched && form.get('service').errors?.required">This field is mandotory</label>
-              <option value="0">--Select--</option>
-              <option *ngFor="let country of countries" value={{country.id}}>{{country.name}}</option>
-            </select>
-          </div>
-  
-        <div class="form-group">
-            <label>Brand</label>
-            <select class="form-control" formControlName="brand">
-              <option value="">--Select--</option>
-              <option *ngFor="let state of states ">{{state.name}}</option>
-              
-            </select>
-          </div>
-          
-  
-        <button type="button" class="btn btn-primary" (click)="onSave()">Search</button>
 
-        
-      </div>
-    </div>
-    <div class="container" *ngIf="showTimeslots">
-      <table class="table table-hover table-sm">
-        <thead>
-            <tr>
-              <th>Time Slot</th>
-              <th>From</th>
-              <th>To</th>
-              <th>Click to Book</th>
-            </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let timeslot of timeslots">
-            <td >{{ timeslot.ts_id }}</td>
-            <td>{{ timeslot.from }}</td>
-            <td>{{ timeslot.to}}</td>
-            <td><button type="button" class="btn btn-primary btn-sm" (click)="onBook(timeslot)" data-dismiss="modal">Book now</button></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-
-  </div>
-  
 
 
       </div>

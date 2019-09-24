@@ -20,8 +20,11 @@ export class RegistrationComponent implements OnInit {
 
   
   data:any;//take values from search
+  ts:any;//values timeslots
   countryName:String = '';
   SelectedDate:String='';
+  
+  
   
 
   
@@ -41,6 +44,7 @@ export class RegistrationComponent implements OnInit {
     this.activated.queryParams.subscribe((params)=>{
       console.log(params);
       this.data =JSON.parse(atob(params.data));
+      this.ts =JSON.parse(atob(params.ts));
       this.countryName =this.data.service;
       this.SelectedDate=this.data.Date;
 
@@ -62,7 +66,7 @@ export class RegistrationComponent implements OnInit {
   
   onSubmit(){
     this.countryName=this.countryName;
-    this.SelectedDate=this.data.Date;
+    this.SelectedDate=this.data.Date.getDate();
     
     this.service.register(this.countryName,this.SelectedDate).subscribe(
       (res: any) => {

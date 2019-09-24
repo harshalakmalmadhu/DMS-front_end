@@ -2,69 +2,106 @@
     <div class="col-md-12">
         <form [formGroup]="service.formModel" autocomplete="off" (submit)="onSubmit()">
 
-        <div class="row">        
-            <div class="col-xs-12 col-12 col-sm-6 col-md-4 form-group">
-                <label>Selected Date</label>
-                <input class="form-control" formControlName="SelectedDate"  [value]='data.Date' readonly> 
-                <!-- data from search component -->
-            </div> 
-
-            <div class="col-xs-12 col-12 col-sm-6 col-md-4 form-group">
-                <label>Selected Service Center</label>
-                <input class="form-control" formControlName="SelectedSC" value={{countryName}} readonly>
-                
-                <!-- data from search component -->
-            </div> 
-            <div class="col-xs-12 col-12 col-sm-6 col-md-4 form-group">
-                    <label>Selected Time</label>
-                    <input class="form-control" formControlName="SelectedTime" readonly>
+            <div class="row">
+                <div class="col-xs-12 col-12 col-sm-6 col-md-4 form-group">
+                    <label>Selected Date</label>
+                    <input class="form-control" formControlName="SelectedDate" [value]='data.Date' readonly>
                     <!-- data from search component -->
-                </div> 
-         </div>  
-            
+                </div>
 
+                <div class="col-xs-12 col-12 col-sm-6 col-md-4 form-group">
+                    <label>Selected Service Center</label>
+                    <input class="form-control" formControlName="SelectedSC" value={{countryName}} readonly>
 
-         <div class="row">
-            <div class="col-md-6 form-group">
-                <label>Service Type</label>
-                    <select class="form-control" formControlName="servicetype" required>
-                        <option value="">--Select Service--</option>
-                        <option  *ngFor="let x of servicetypes" value={{x.serviceType}}>{{x.serviceType}}</option>     
-                    </select>
-            </div>
-
-            <div class="col-md-6 form-group">
-                <label>UserName</label>
-                <input class="form-control" formControlName="UserName">
-                <label class="text-danger" *ngIf="service.formModel.get('UserName').touched && service.formModel.get('UserName').errors?.required">This field is mandotory</label>
-            </div>
-            </div>
-
-            <div class="form-group">
-                <label>Email</label>
-                <input class="form-control" formControlName="Email">
-                <label class="text-danger" *ngIf="service.formModel.get('Email').touched && service.formModel.get('Email').errors?.required">This field is mandotory</label> 
-                <label class="text-danger" *ngIf="service.formModel.get('Email').touched && service.formModel.get('Email').errors?.email">Invalid email address</label>
-            </div>
-           
-            <div class="form-group">
-                <label>Vehicle Number</label>
-                <input class="form-control" formControlName="VehicleNo">
-            </div>  
-            
-            <div class="form-group">
-                <label>Mobile No</label>
-                <input class="form-control" formControlName="MobileNo">
-            </div>  
-            <div class="form-row">
-                <div class="form-group col-md-8 offset-md-2">
-                    <button type="submit" class="btn btn-outline-primary waves-effect" [disabled]="!service.formModel.valid">Submit</button>
+                    <!-- data from search component -->
+                </div>
+                <div class="col-xs-12 col-12 col-sm-6 col-md-4 form-group">
+                    <label>Selected Time</label>
+                    <input class="form-control" formControlName="SelectedTime" value={{ts.from}}-{{ts.to}} readonly>
+                    <!-- data from search component -->
                 </div>
             </div>
 
+
+
+            <div class="row">
+                <div class="col-md-4 form-group">
+                    <label>UserName</label>
+
+                    <div class="input-group-prepend">
+                        <div class="input-group-text"><i class="fa fa-user" area-hidden="true"></i></div>
+                        <input class="form-control" formControlName="UserName">
+                    </div>
+                    <label class="text-danger"
+                        *ngIf="service.formModel.get('UserName').touched && service.formModel.get('UserName').errors?.required">This
+                        field is mandotory</label>
+
+                </div>
+                <div class="col-md-8 form-group">
+                    <label>E-mail</label>
+
+                    <div class="input-group-prepend">
+                        <div class="input-group-text"><i class="fa fa-envelope" area-hidden="true"></i></div>
+                        <input class="form-control" formControlName="Email">
+                    </div>
+
+
+                    <label class="text-danger"
+                        *ngIf="service.formModel.get('Email').touched && service.formModel.get('Email').errors?.required">This
+                        field is mandotory</label>
+                    <label class="text-danger"
+                        *ngIf="service.formModel.get('Email').touched && service.formModel.get('Email').errors?.email">Invalid
+                        email address</label>
+
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col-md-8 form-group">
+                    <label>Service Type</label>
+                    <select class="form-control" formControlName="servicetype" required>
+                        <option value="">--Select a Service--</option>
+                        <option *ngFor="let x of servicetypes" value={{x.serviceType}}>{{x.serviceType}}</option>
+                        <label class="text-danger"
+                            *ngIf="service.formModel.get('servicetype').touched && service.formModel.get('servicetype').errors?.required">This
+                            field is mandotory</label>
+                    </select>
+                </div>
+
+
+                <div class="col-md-4 form-group">
+                    <label>Vehicle Number</label>
+
+                    <div class="input-group-prepend">
+                        <div class="input-group-text"><i class="fa fa-car" area-hidden="true"></i></div>
+
+                        <input class="form-control" formControlName="VehicleNo" required>
+                    </div>
+                    <label class="text-danger"
+                        *ngIf="service.formModel.get('VehicleNo').touched && service.formModel.get('VehicleNo').errors?.required">This
+                        field is mandotory</label>
+
+                </div>
+
+                <div class="col-xs-12 col-12 col-sm-6 col-md-4 form-group">
+                    <label>Mobile No</label>
+
+                    <div class="input-group-prepend">
+                        <div class="input-group-text"><i class="fa fa-phone" fa-lg fa-fw area-hidden="true"></i>
+                        </div>
+
+                        <input class="form-control" formControlName="MobileNo" required>
+                    </div>
+                    <label class="text-danger"
+                        *ngIf="service.formModel.get('MobileNo').touched && service.formModel.get('MobileNo').errors?.required">This
+                        field is mandotory</label>
+
+                </div>
+            </div>
         </form>
 
+        <button type="submit" class="btn btn-outline-primary waves-effect"
+            [disabled]="!service.formModel.valid">Submit</button>
     </div>
-
-
 </div>

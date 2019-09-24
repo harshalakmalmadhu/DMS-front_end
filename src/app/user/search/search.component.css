@@ -7,7 +7,7 @@
   margin-bottom: 10px; 
 } 
 
-.icon { 
+.icon {
   padding-bottom: 10px;
   border-bottom-width: 20px;
   padding-top: 10px;
@@ -17,8 +17,6 @@
   left: 335px;
 } 
 
-.input-field { 
-  width: 100%; 
-  padding: 10px; 
-  text-align: center; 
+.form-control,.input-group-text{
+  border: 1px solid #0080ff;
 }

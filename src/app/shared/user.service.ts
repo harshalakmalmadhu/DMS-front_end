@@ -18,9 +18,9 @@ export class UserService {
   formModel = this.fb.group({
     UserName: ['',Validators.required],
     Email: ['',[Validators.required,Validators.email]],
-    servicetype:[''],
-    MobileNo:[''],
-    VehicleNo:[''],
+    servicetype:['',Validators.required],
+    MobileNo:['',Validators.required],
+    VehicleNo:['',Validators.required],
     SelectedDate:[''],
     SelectedSC:[''],
     SelectedTime:['']

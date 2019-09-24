@@ -19,6 +19,7 @@ import { UserService } from './shared/user.service';
 import { SelectService } from "./shared/search.service";
 import { SearchComponent } from './user/search/search.component';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
     UserComponent,
     RegistrationComponent,
     SearchComponent,
+    HomeComponent,
     
   ],
   imports: [

@@ -190,3 +190,27 @@
       width: 25em;
     }
   }
+  .input-icons i { 
+    position: absolute; 
+  } 
+  
+  .input-icons { 
+    width: 100%; 
+    margin-bottom: 10px; 
+  } 
+  
+  .icon { 
+    padding-bottom: 10px;
+    border-bottom-width: 20px;
+    padding-top: 10px;
+    padding-right: 10px;
+    padding-left: 30px;
+    min-width: 40px; 
+    left: 335px;
+  } 
+  .form-control,.input-group-text{
+    border: 1px solid #0080ff;
+  }
+  
+  
+  

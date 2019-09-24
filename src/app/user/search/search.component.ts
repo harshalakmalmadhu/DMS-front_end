@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router,ActivatedRoute } from "@angular/router";
 import { FormControl,FormGroup,Validators } from "@angular/forms";
+import { HttpClient,HttpClientModule } from "@angular/common/http";
+
 
 
 import { SelectService } from 'src/app/shared/search.service';
@@ -18,6 +20,8 @@ import {timeslots} from 'src/app/shared/timeslots';
 export class SearchComponent implements OnInit {
   
   public showTimeslots : boolean = false;
+  public showDatePickerArea : boolean = true;
+
 
   timeslots:timeslots[] = [
     {ts_id:'1',from:'7.45 AM',to : '8.00 AM'},
@@ -32,6 +36,8 @@ export class SearchComponent implements OnInit {
     {ts_id:'10',from:'12.00 PM',to : '12.30 PM'},
 
   ];
+
+  tsarray:String[];
   
   
   ngOnInit() {
@@ -39,12 +45,24 @@ export class SearchComponent implements OnInit {
     this.countries = this.selectService.getCountries();//load all the service centers 
     
     this.onSelect(this.selectedCountry.id);
+    
+    this.http.get('http://localhost:3050/allDocs').subscribe(  
+      data => {  
+       this.tsarray = data as string [];  
+      }  
+      
+      
+    );
+    
 
   }
   onDateChange(newDate: Date) {
     console.log(newDate);
   }
-  constructor(private selectService: SelectService,private router :Router,private activated:ActivatedRoute ) {
+  
+  constructor(private selectService: SelectService,private router :Router,private activated:ActivatedRoute,private http:HttpClient ) {
+    this.minDate=new Date();
+   
     this.form = new FormGroup({
       Date:new FormControl('',Validators.required),
       service:new FormControl('',Validators.required),
@@ -57,6 +75,7 @@ export class SearchComponent implements OnInit {
   states: State[];
   form:any;
   isShow:false ;
+  minDate:Date;
 
  
 
@@ -65,6 +84,7 @@ export class SearchComponent implements OnInit {
 
   onSave(){
     this.showTimeslots = !this.showTimeslots;
+    this.showDatePickerArea=!this.showDatePickerArea;
 
 
     let data:any = this.form.value;
@@ -74,14 +94,18 @@ export class SearchComponent implements OnInit {
     //   queryParams:{data:btoa(JSON.stringify(data))}
     // })
   }
-  onBook(selectedItem: any){
-    console.log(selectedItem.to);
+  onBook(selectedTimeSlot: any){
+    console.log(selectedTimeSlot.to);
+    console.log(selectedTimeSlot.from);
+   
+    
+
     let data:any = this.form.value;
+    let ts:any =selectedTimeSlot;
     
      this.router.navigate(['user/registration'],
-     {
-       queryParams:{data:btoa(JSON.stringify(data))}
-     })
+     {queryParams:{data:btoa(JSON.stringify(data)),ts:btoa(JSON.stringify(ts))}   })
+     
 
   }
   // =======================================================
