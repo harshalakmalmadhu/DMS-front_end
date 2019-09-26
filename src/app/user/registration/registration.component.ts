@@ -84,22 +84,23 @@ export class RegistrationComponent implements OnInit {
           
          
         }else {
-          // res.errors.forEach(element => {
-          //   switch (element.code) {
-          //     case 'DuplicateUserName':
-                this.toastr.error('Username is already taken','Registration failed.');
+           res.errors.forEach(element => {
+           switch (element.code) {
+             case 'DuplicateUserName':
+                this.toastr.error('Backend','Registration failed.');
 
-          //       break;
+                break;
 
-          //     default:
-          //     this.toastr.error(element.description,'Registration failed.');
-          //       break;
-          //   }
-          // });
+              default:
+              this.toastr.error(element.description,'Registration failed.');
+                break;
+            }
+           });
         }
       },
       err =>{
-        console.log(err);
+        this.toastr.error('Internal Server Error!!','Registration failed.');
+        // console.log(err);
       }
     );
   }

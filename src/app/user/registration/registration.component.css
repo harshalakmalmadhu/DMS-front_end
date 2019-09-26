@@ -211,6 +211,10 @@
   .form-control,.input-group-text{
     border: 1px solid #0080ff;
   }
+  .form-group.required .control-label:after {
+    content:"*";
+    color:red;
+  }
   
   
   
