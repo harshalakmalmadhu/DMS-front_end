@@ -46,13 +46,13 @@ export class SearchComponent implements OnInit {
     
     this.onSelect(this.selectedCountry.id);
     
-    this.http.get('http://localhost:3050/allDocs').subscribe(  
-      data => {  
-       this.tsarray = data as string [];  
-      }  
+    // this.http.get('http://localhost:3050/allDocs').subscribe(  
+    //   data => {  
+    //    this.tsarray = data as string [];  
+    //   }  
       
       
-    );
+    // );
     
 
   }
@@ -95,7 +95,7 @@ export class SearchComponent implements OnInit {
     // })
   }
   onBook(selectedTimeSlot: any){
-    console.log(selectedTimeSlot.to);
+    console.log(selectedTimeSlot);
     console.log(selectedTimeSlot.from);
    
     

@@ -5,7 +5,10 @@
             <div class="row">
                 <div class="col-xs-12 col-12 col-sm-6 col-md-4 form-group">
                     <label>Selected Date</label>
-                    <input class="form-control" formControlName="SelectedDate" [value]='data.Date' readonly>
+                     <!-- <input class="form-control" formControlName="SelectedDate" [value]='data.Date' readonly>  -->
+
+                     <input class="form-control" formControlName="SelectedDate" value="{{ SelectedDate}}" 
+            [(ngModel)]="myDate" readonly> 
                     <!-- data from search component -->
                 </div>
 
@@ -17,7 +20,7 @@
                 </div>
                 <div class="col-xs-12 col-12 col-sm-6 col-md-4 form-group">
                     <label>Selected Time</label>
-                    <input class="form-control" formControlName="SelectedTime" value={{ts.from}}-{{ts.to}} readonly>
+                    <input class="form-control" formControlName="SelectedTime" value={{SelectedTime}} readonly>
                     <!-- data from search component -->
                 </div>
             </div>
@@ -99,9 +102,10 @@
 
                 </div>
             </div>
+            <button type="submit" class="btn btn-outline-primary waves-effect"
+            [disabled]="!service.formModel.valid">Submit</button>
         </form>
 
-        <button type="submit" class="btn btn-outline-primary waves-effect"
-            [disabled]="!service.formModel.valid">Submit</button>
+        
     </div>
 </div>

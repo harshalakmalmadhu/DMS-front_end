@@ -10,6 +10,7 @@ import { MatNativeDateModule} from "@angular/material";
 import { MatButtonModule} from "@angular/material";
 import { MatIconModule } from "@angular/material";
 import {MatFormFieldModule} from '@angular/material/form-field';
+import { DatePipe } from "@angular/common";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -52,7 +53,7 @@ import { HomeComponent } from './home/home.component';
     
     BsDatepickerModule.forRoot()
   ],
-  providers: [UserService,SelectService],
+  providers: [UserService,SelectService,DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

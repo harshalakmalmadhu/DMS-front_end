@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/shared/user.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router,ActivatedRoute } from '@angular/router';
+import { DatePipe } from "@angular/common";
 
 
 import { SelectService } from 'src/app/shared/search.service';
@@ -23,6 +24,7 @@ export class RegistrationComponent implements OnInit {
   ts:any;//values timeslots
   countryName:String = '';
   SelectedDate:String='';
+  SelectedTime:String='';
   
   
   
@@ -32,7 +34,7 @@ export class RegistrationComponent implements OnInit {
     private toastr : ToastrService,
     private router:Router,
     private activated:ActivatedRoute,
-    private serviceTypes:SelectService) { }
+    private serviceTypes:SelectService,private datePipe:DatePipe) { }
     servicetypes:ServiceTypes[];
     
 
@@ -46,7 +48,8 @@ export class RegistrationComponent implements OnInit {
       this.data =JSON.parse(atob(params.data));
       this.ts =JSON.parse(atob(params.ts));
       this.countryName =this.data.service;
-      this.SelectedDate=this.data.Date;
+      this.SelectedDate=this.datePipe.transform(this.data.Date,'yyyy-MM-dd');
+      this.SelectedTime=this.ts.from+"-"+this.ts.to;
 
   })
   
@@ -66,9 +69,14 @@ export class RegistrationComponent implements OnInit {
   
   onSubmit(){
     this.countryName=this.countryName;
-    this.SelectedDate=this.data.Date.getDate();
+    this.SelectedDate=this.SelectedDate;
+    this.SelectedTime=this.ts.from+"-"+this.ts.to;
+
     
-    this.service.register(this.countryName,this.SelectedDate).subscribe(
+    console.log(this.SelectedDate)
+    console.log(this.SelectedTime)
+    
+    this.service.register(this.countryName,this.SelectedDate,this.SelectedTime).subscribe(
       (res: any) => {
         if (res.Successful) {
           this.service.formModel.reset();
