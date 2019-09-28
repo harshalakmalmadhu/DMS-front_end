@@ -5,10 +5,10 @@
             <div class="row">
                 <div class="col-xs-12 col-12 col-sm-6 col-md-4 form-group">
                     <label>Selected Date</label>
-                     <!-- <input class="form-control" formControlName="SelectedDate" [value]='data.Date' readonly>  -->
+                    <!-- <input class="form-control" formControlName="SelectedDate" [value]='data.Date' readonly>  -->
 
-                     <input class="form-control" formControlName="SelectedDate" value="{{ SelectedDate}}" 
-            [(ngModel)]="myDate" readonly> 
+                    <input class="form-control" formControlName="SelectedDate" value="{{ SelectedDate}}"
+                        [(ngModel)]="myDate" readonly>
                     <!-- data from search component -->
                 </div>
 
@@ -66,10 +66,11 @@
                     <select class="form-control" formControlName="servicetype" required>
                         <option value="">--Select a Service--</option>
                         <option *ngFor="let x of servicetypes" value={{x.serviceType}}>{{x.serviceType}}</option>
-                        <label class="text-danger"
-                            *ngIf="service.formModel.get('servicetype').touched && service.formModel.get('servicetype').errors?.required">This
-                            field is mandotory</label>
+
                     </select>
+                    <label class="text-danger"
+                        *ngIf="service.formModel.get('servicetype').touched && service.formModel.get('servicetype').errors?.required">This
+                        field is mandotory</label>
                 </div>
 
 
@@ -103,9 +104,9 @@
                 </div>
             </div>
             <button type="submit" class="btn btn-outline-primary waves-effect"
-            [disabled]="!service.formModel.valid">Submit</button>
+                [disabled]="!service.formModel.valid">Submit</button>
         </form>
 
-        
+
     </div>
 </div>
